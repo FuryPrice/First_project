@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <link rel="stylesheet" href="test.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Камень — Мини‑сайт с описанием</title>
+  <meta name="description" content="Эстетичный одностраничный сайт о камне: происхождение, свойства, факты. Тёмная тема." />
+</head>
+<body>
+  <div class="stars"></div>
+  <header>
+    <div>
+      <div class="badge"><span class="dot"></span><span>минералогия • факты • эстетика</span></div>
+      <h1>Камень</h1>
+      <p class="subtitle">Надёжность, сформированная временем. На этой странице — краткая, но насыщенная история камня: происхождение, текстура, свойства и то, за что его ценят в архитектуре и дизайне.</p>
+      <div class="cta">
+        <a class="btn" href="#properties" aria-label="К свойствам">Свойства</a>
+        <a class="btn" href="#origin" aria-label="К происхождению">Происхождение</a>
+      </div>
+    </div>
+    <div class="stone-wrap" aria-hidden="true">
+      <div class="aura"></div>
+      <!-- Низкополигональная иллюстрация камня (SVG) -->
+      <svg class="stone" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Стиллизованный камень">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0%" stop-color="#ced4ff"/>
+            <stop offset="50%" stop-color="#7df9ff"/>
+            <stop offset="100%" stop-color="#8d7dff"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" x2="1">
+            <stop offset="0%" stop-color="#1c1f28"/>
+            <stop offset="100%" stop-color="#2b2f3a"/>
+          </linearGradient>
+        </defs>
+        <g filter="url(#f)">
+          <path d="M120 360 L220 140 L420 120 L520 280 L460 460 L260 520 Z" fill="url(#g2)"/>
+          <path d="M220 140 L420 120 L360 240 L240 220 Z" fill="#2f3340"/>
+          <path d="M360 240 L520 280 L460 460 L340 380 Z" fill="#2a2d39"/>
+          <path d="M240 220 L360 240 L340 380 L200 360 Z" fill="#242734"/>
+          <path d="M200 360 L340 380 L260 520 Z" fill="#1f222d"/>
+          <!-- Блик -->
+          <ellipse cx="320" cy="200" rx="80" ry="26" fill="url(#g1)" opacity=".25">
+            <animate attributeName="opacity" values="0.12;0.32;0.12" dur="4.6s" repeatCount="indefinite"/>
+          </ellipse>
+        </g>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <section id="properties" class="grid" aria-labelledby="h-prop">
+      <article class="card">
+        <h3 id="h-prop">Основные свойства</h3>
+        <div class="divider"></div>
+        <p><strong>Твёрдость:</strong> 6–7 по Моосу (пример для кварцсодержащих пород). Высокая износостойкость, устойчивость к перепадам температур.</p>
+        <p><strong>Текстура:</strong> от мелко‑ до крупнозернистой. Может включать прожилки и вкрапления минералов.</p>
+      </article>
+      <article class="card">
+        <h3>Применение</h3>
+        <div class="divider"></div>
+        <p>Фасады и интерьер, мощение, ландшафтный дизайн, художественные объекты. Камень ценят за долговечность, благородный вид и тактильность.</p>
+      </article>
+      <article class="card">
+        <h3>Уход</h3>
+        <div class="divider"></div>
+        <p>Регулярная сухая чистка, щадящие pH‑нейтральные средства, периодическая обработка защитными пропитками для снижения влагопоглощения.</p>
+      </article>
+    </section>
+
+    <section id="origin" class="facts" aria-labelledby="h-origin">
+      <article class="card">
+        <h3 id="h-origin">Происхождение</h3>
+        <div class="divider"></div>
+        <p>Каменные породы формируются тремя путями: магматическим, осадочным и метаморфическим. Различие в условиях образования задаёт структуру, прочность и декоративность материала.</p>
+        <ul class="list">
+          <li><strong>Магматические</strong>: гранит, базальт — кристаллизация магмы.</li>
+          <li><strong>Осадочные</strong>: известняк, песчаник — уплотнение осадков.</li>
+          <li><strong>Метаморфические</strong>: мрамор, гнейс — преобразование под давлением и температурой.</li>
+        </ul>
+      </article>
+      <aside class="card" aria-label="Краткие факты">
+        <h3>Краткие факты</h3>
+        <div class="divider"></div>
+        <p>• Плотность: 2.6–3.0 г/см³<br>• Влагопоглощение: низкое–среднее<br>• Теплопроводность: высокая для массивных блоков</p>
+        <p class="small">Показатели зависят от конкретной породы и степени пористости.</p>
+      </aside>
+    </section>
+  </main>
+
+  <footer>
+    <span class="small">© Камень • демонстрационный одностраничный сайт</span>
+    <a class="btn" href="#top">Наверх ↑</a>
+  </footer>
+
+  <script>
+    // Лёгкий параллакс для SVG‑камня
+    const stone = document.querySelector('.stone');
+    let raf;
+    window.addEventListener('mousemove', (e)=>{
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(()=>{
+        const x = (e.clientX / innerWidth - .5) * 8;
+        const y = (e.clientY / innerHeight - .5) * 8;
+        stone.style.transform = `translateY(${y*-1}px) rotateX(${y/3}deg) rotateY(${x/3}deg)`;
+      });
+    });
+  </script>
+</body>
+</html>
